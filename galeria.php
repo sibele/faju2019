@@ -17,15 +17,19 @@ $query = $mysqli->query($sql);
 
                 <?php
                 foreach ($query as $galeria):
+                    //print_r($galeria['nome']);
+                    //print_r($galeria['descricao']);
                     ?>
                     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title=""
+                        <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="<?php echo $galeria['descricao'] ?>"
                            data-image="upload/galeria/<?php echo $galeria['caminho'] ?>"
                            data-target="#image-gallery">
+                             
                             <img class="img-thumbnail"
                                  src="upload/galeria/<?php echo $galeria['caminho'] ?>"
-                                 alt="<?php echo $galeria['descricao'] ?>">
+                                 alt="<?php echo $galeria['descricao'] ?>">                           
                         </a>
+                        <?php print_r($galeria['nome']); ?>
                     </div>
                 <?php endforeach; ?>
 
@@ -43,8 +47,7 @@ $query = $mysqli->query($sql);
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                                </button>
-
+                                </button>                                
                                 <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
                                 </button>
                             </div>
