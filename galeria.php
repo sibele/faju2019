@@ -32,7 +32,10 @@ $query = $mysqli->query($sql);
                                  src="upload/galeria/<?php echo $galeria['caminho'] ?>"
                                  alt="<?php echo $galeria['descricao'] ?>">                           
                         </a>
-                        <?php print_r($galeria['nome']); ?>
+                        <div style="background-color:white; text-align:center; font-size: 16px; position: relative; 
+                             top: -7px; border-radius: 7px; font-family: 'BlinkMacSystemFon'">
+                             <?php print_r($galeria['nome']); ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
 
