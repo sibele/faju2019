@@ -78,7 +78,7 @@ include_once('sessao.php');
                                     case 'rot_lug_inc': echo 'Incluir dados das Definir Roteiros';
                                         break;
                                     case 'rot_lug_alt': echo 'Alterar dados das Definir Roteiros';
-                                        break;                                          
+                                        break;
                                     case 'con_alt': echo 'Alterar dados dos Contato';
                                         break;
                                     case 'usu_inc': echo 'Incluir dados dos Usuarios';
@@ -166,17 +166,17 @@ include_once('sessao.php');
                         </header>
                         <ul class="contact">
                             <li><a href="?url=ini"> <i class="fas fa-home"></i> Home</a></li>
-                            <li><a href="?url=qm_alt"> <i class="fas fa-archway"></i> Empresa</a></li> 
-                            <li><a href="?url=gal"> <i class="fas fa-images"></i> Fotos</a></li>
+                            <li><a href="?url=qm_alt"> <i class="fas fa-archway"></i> Empresa</a></li>
+                            <li><a href="?url=con"> <i class="fas fa-phone"></i> Contatos</a></li>
+                            <li><a href="?url=img"> <i class="fas fa-images"></i> Imagens do Site (Front-End)</a></li>
+                            <li><a href="?url=gal"> <i class="fas fa-images"></i> Galeria/Fotos</a></li>
                             <li><a href="?url=lug"> <i class="fas fa-bus"></i> Lugares</a></li>
                             <li> <a href="?url=rot"> <i class="fas fa-clipboard-list"></i> Roteiros</a></li>
                             <li><a href="?url=rot_lug"> <i class="fas fa-map-marked-alt"></i> Definir roteiros</a></li>
-                            <li><a href="?url=con"> <i class="fas fa-phone"></i> Contatos</a></li>
-                            <li><a href="?url=img"> <i class="fas fa-images"></i> Imagens do Site</a></li>
                             <li><a href="?url=usu"> <i class="fas fa-user-tie"></i> Usuários</a></li>
                         </ul>
                     </nav>
-                    
+
                     <!-- Footer -->
                     <footer id="footer">
                         <p class="alinke"><a href="../index.php" ><input class="alink" type="submit" value="VOLTAR AO SITE"/></a></p>

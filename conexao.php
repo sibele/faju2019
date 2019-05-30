@@ -1,15 +1,15 @@
 ﻿<?php
-//paramentros de configuração
+//paramentros de configuração OFICIAL
 $host = 'mysql07-farm76.kinghost.net';//Ip do servidor MySQL  http://mysql.fajuturismo.com.br/
 $base = 'fajuturismo01'; // fajuturismo
 $usuario = 'fajuturi01_add1';// fajuturism_add1
 $senha = 'FAJUturismo2018'; //FAJUturismo2018
 
 //paramentros de configuração
-//$host = 'localhost';//Ip do servidor MySQL  http://mysql.fajuturismo.com.br/
-//$base = 'faju'; // fajuturismo
-//$usuario = 'root';// fajuturism_add1
-//$senha = ''; //FAJUturismo2018
+//$host = 'http://mysql.fajuturismo.com.br/';//Ip do servidor MySQL  http://mysql.fajuturismo.com.br/
+//$base = 'fajuturismo'; // fajuturismo
+//$usuario = 'fajuturism_add1';// fajuturism_add1
+//$senha = 'FAJUturismo2018'; //FAJUturismo2018
 
 //Conexao ao BD
 

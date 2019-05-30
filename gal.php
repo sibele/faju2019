@@ -1,6 +1,6 @@
 <?php
 include './conexao.php';
-$roteiro_id= $_GET["url"];
+$roteiro_id = $_GET["url"];
 $id = str_replace("gal", "", $roteiro_id);
 
 $sql = "select * from galeria, lugares, roteiro_lugares 
@@ -13,7 +13,7 @@ $query = $mysqli->query($sql);
 $sql1 = "Select * from roteiro where id = $id;";
 $query1 = $mysqli->query($sql1);
 $dados = $query1->fetch_array();
-    $sobre = $dados['titulo'];
+$sobre = $dados['titulo'];
 ?>
 
 <div>
@@ -26,10 +26,10 @@ $dados = $query1->fetch_array();
         <div class="row">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                <h4 class="site-heading text-center text-white d-none d-lg-block">
-                    <span>Galeria do <?php echo $sobre ?></span>
-                </h4>
-            </div>
+                    <h4 class="site-heading text-center text-white d-none d-lg-block">
+                        <span>Galeria do <?php echo $sobre ?></span>
+                    </h4>
+                </div>
                 <?php
                 foreach ($query as $galeria):
                     ?>
@@ -39,29 +39,39 @@ $dados = $query1->fetch_array();
                            data-target="#image-gallery">
                             <img class="img-thumbnail"
                                  src="upload/galeria/<?php echo $galeria['caminho'] ?>"
-                                 alt="<?php echo $galeria['descricao'] ?>">
+                                 alt="<?php echo $galeria['descricao'] ?>"
+                                 style="width: 400px; height: 200px;">
                         </a>
+
+                        <div style="background-color:white; text-align:center; font-size: 16px; position: relative; 
+                             top: -7px; border-radius: 7px; font-family: 'BlinkMacSystemFon';">
+                             <?php print_r($galeria['nome']); ?>
+                        </div>
+
                     </div>
                 <?php endforeach; ?>
 
 
-                <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" style=" height: 650px; " id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="image-gallery-title"></h4>
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                            <div class="modal-header" style=" margin-left: 15px; margin-top: 1px;">
+                                <h5 class="modal-title" id="image-gallery-title"></h5>
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">x</span><span class="sr-only">Close</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                                <button type="button" style=" position: absolute; left: -10px; top: 200px;" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                                </button>  
+
+                                <button type="button" style=" position: absolute; right: -10px; top: 200px;" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
                                 </button>
 
-                                <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
-                                </button>
+                                <img  id="image-gallery-image" style="  border-radius: 20px;" class="img-responsive col-md-12" src="">
+                            </div>
+                            <div class="modal-footer2"></div>
+                            <div class="modal-footer">
+
                             </div>
                         </div>
                     </div>
@@ -70,98 +80,109 @@ $dados = $query1->fetch_array();
         </div>
 
         <script type="text/javascript">
-            let modalId = $('#image-gallery');
-
-            $(document)
+                    let modalId = $('#image-gallery');
+                    $(document)
                     .ready(function () {
 
-                        loadGallery(true, 'a.thumbnail');
+                    loadGallery(true, 'a.thumbnail');
+                            //This function disables buttons when needed
+                                    function disableButtons(counter_max, counter_current) {
+                                    $('#show-previous-image, #show-next-image')
+                                            .show();
+                                            if (counter_max === counter_current) {
+                                    $('#show-next-image')
+                                            .hide();
+                                    } else if (counter_current === 1) {
+                                    $('#show-previous-image')
+                                            .hide();
+                                    }
+                                    }
 
-                        //This function disables buttons when needed
-                        function disableButtons(counter_max, counter_current) {
-                            $('#show-previous-image, #show-next-image')
-                                    .show();
-                            if (counter_max === counter_current) {
-                                $('#show-next-image')
-                                        .hide();
-                            } else if (counter_current === 1) {
-                                $('#show-previous-image')
-                                        .hide();
-                            }
-                        }
+                            /**
+                             *
+                             * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
+                             * @param setClickAttr  Sets the attribute for the click handler.
+                             */
 
-                        /**
-                         *
-                         * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
-                         * @param setClickAttr  Sets the attribute for the click handler.
-                         */
-
-                        function loadGallery(setIDs, setClickAttr) {
+                            function loadGallery(setIDs, setClickAttr) {
                             let current_image,
                                     selector,
                                     counter = 0;
-
-                            $('#show-next-image, #show-previous-image')
+                                    $('#show-next-image, #show-previous-image')
                                     .click(function () {
-                                        if ($(this)
-                                                .attr('id') === 'show-previous-image') {
-                                            current_image--;
-                                        } else {
-                                            current_image++;
-                                        }
+                                    if ($(this)
+                                            .attr('id') === 'show-previous-image') {
+                                    current_image--;
+                                    } else {
+                                    current_image++;
+                                    }
 
-                                        selector = $('[data-image-id="' + current_image + '"]');
-                                        updateGallery(selector);
+                                    selector = $('[data-image-id="' + current_image + '"]');
+                                            updateGallery(selector);
                                     });
-
-                            function updateGallery(selector) {
-                                let $sel = selector;
-                                current_image = $sel.data('image-id');
-                                $('#image-gallery-title')
-                                        .text($sel.data('title'));
-                                $('#image-gallery-image')
-                                        .attr('src', $sel.data('image'));
-                                disableButtons(counter, $sel.data('image-id'));
-                            }
+                                    function updateGallery(selector) {
+                                    let $sel = selector;
+                                            current_image = $sel.data('image-id');
+                                            $('#image-gallery-title')
+                                            .text($sel.data('title'));
+                                            $('#image-gallery-image')
+                                            .attr('src', $sel.data('image'));
+                                            disableButtons(counter, $sel.data('image-id'));
+                                    }
 
                             if (setIDs == true) {
-                                $('[data-image-id]')
-                                        .each(function () {
-                                            counter++;
+                            $('[data-image-id]')
+                                    .each(function () {
+                                    counter++;
                                             $(this)
-                                                    .attr('data-image-id', counter);
-                                        });
+                                            .attr('data-image-id', counter);
+                                    });
                             }
                             $(setClickAttr)
                                     .on('click', function () {
-                                        updateGallery($(this));
+                                    updateGallery($(this));
                                     });
-                        }
+                            }
+                            });
+                            // build key actions
+                            $('body').keydown(function(e){
+                    const KEY_LEFT = 37;
+                            const KEY_RIGHT = 39;
+                            switch (e.keyCode){
+                    case KEY_LEFT  : {
+                    $('.float-left').click();
+                            break;
+                    }
+
+                    case KEY_RIGHT : {
+                    $('.float-right').click();
+                            break;
+                    }
+                    }
                     });
+                            $('.ctn-food').cycle({
 
-            // build key actions
-            $(document)
-                    .keydown(function (e) {
-                        switch (e.which) {
-                            case 37: // left
-                                if ((modalId.data('bs.modal') || {})._isShown && $('#show-previous-image').is(":visible")) {
-                                    $('#show-previous-image')
-                                            .click();
-                                }
-                                break;
-
-                            case 39: // right
-                                if ((modalId.data('bs.modal') || {})._isShown && $('#show-next-image').is(":visible")) {
-                                    $('#show-next-image')
-                                            .click();
-                                }
-                                break;
-
-                            default:
-                                return; // exit this handler for other keys
-                        }
-                        e.preventDefault(); // prevent the default action (scroll / move caret)
+                    fx: 'scrollHorz',
+                            timeout: 0,
+                            prev:".prev",
+                            next:".next",
+                            speed: 300,
+                            containerResize: 0,
+                            slideResize: 0,
+                            fit: 1,
                     });
+                            $('.ctn-table').cycle({
 
+                    fx: 'fade',
+                            timeout: 0,
+                            prev:".prev",
+                            next:".next",
+                            speed: 500,
+                            containerResize:0,
+                            slideResize: 0,
+                            fit:1
+
+
+                    });
         </script> </div></div>
 <br><br>

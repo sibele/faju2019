@@ -9,12 +9,13 @@
             <th>Roteiro</th>
             <th>Lugares</th>
             <th>Paradas</th>
+            <th>Descrição</th>
         </tr>
     </thead>
     <tbody>
         <?php
             include ('../conexao.php');
-            $sql = "SELECT roteiro_lugares.id,  roteiro.titulo as roteiro, lugares.nome as lugares, parada.nome as parada FROM roteiro_lugares, roteiro, lugares, parada WHERE roteiro_lugares.roteiro_id = roteiro.id AND roteiro_lugares.lugares_id = lugares.id AND roteiro_lugares.parada_id = parada.id";
+            $sql = "SELECT roteiro_lugares.id,  roteiro_lugares.descricao as descricao, roteiro.titulo as roteiro, lugares.nome as lugares, parada.nome as parada FROM roteiro_lugares, roteiro, lugares, parada WHERE roteiro_lugares.roteiro_id = roteiro.id AND roteiro_lugares.lugares_id = lugares.id AND roteiro_lugares.parada_id = parada.id";
         
 
             $query = $mysqli->query($sql);
@@ -24,6 +25,7 @@
                 $roteiro_id = $dados ['roteiro'];
                 $lugares_id = $dados ['lugares'];
                 $parada_id = $dados ['parada'];
+                $descricao_roteiro_lugar = $dados ['descricao'];
         ?>  
         <tr>
             <td class="col1"> <a href="index.php?url=rot_lug_alt&id=<?=$cod; ?>"><img src="img/editar.png" width="30px" title="Editar"></a> <a href="roteiro_lugares_exc.php?id=<?=$cod; ?>"onclick="return excluir('<?=$nome;?>');"><img src="img/excluir.png" width="35px" title="Exluir"></a></td>
@@ -31,6 +33,7 @@
             <td class="col3"><?= $roteiro_id; ?></td>
             <td class="col4"><?= $lugares_id; ?></td>
             <td class="col4"><?= $parada_id; ?></td>
+            <td class="col4"><?= $descricao_roteiro_lugar; ?></td>
                    
             </td>
         </tr>
