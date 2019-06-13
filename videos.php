@@ -1,22 +1,13 @@
 <?php
 include './conexao.php';
-$sql = "select * from roteiro";
+$sql = "select * from videos";
 $query = $mysqli->query($sql);
 //$dados = $query->fetch_array(); 
-?>     
-
+?>        
 <section class="page-section clearfix" id="portfolio">
-    <div class="container" style=" margin: 0 auto; padding: 0px; text-align: center;">
-
-        <div class="intro-text left-0 text-center bg-faded rounded" style=" height: 110px; padding: 0px; margin: 0px 15px 20px 15px;">
-            <br>                                                                                            
-            <h2>Roteiros sugestivos</h2>
-            <p>Os roteiros abaixo são apenas sugestões, para a personalização 
-                do seu tur entre em contato.</p>
-        </div>
-
+    <div class="container">
         <div class="row">   
-            <?php foreach ($query as $roteiro) { ?>      
+            <?php foreach ($query as $videos) { ?>      
 
                 <div class="col-md-4 col-sm-6 portfolio-item">
                     <img class="img-fluid" src="upload/roteiro/<?php echo $roteiro['foto_principal'] ?>" height="500"  alt=""> 

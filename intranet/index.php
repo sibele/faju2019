@@ -83,7 +83,11 @@ include_once('sessao.php');
                                         break;
                                     case 'usu_inc': echo 'Incluir dados dos Usuarios';
                                         break;
-                                    case 'usu_alt': echo 'Alterar dados dos Usuarios';
+                                    case 'vid': echo 'Alterar dados dos Usuarios';
+                                        break;
+                                    case 'vid_inc': echo 'Incluir vídeos';
+                                        break;
+                                    case 'gal_alt': echo 'Alterar Vídeos';
                                         break;
                                     default: echo 'Home';
                                         break;
@@ -146,6 +150,10 @@ include_once('sessao.php');
                                     break;
                                 case 'usu_alt': include('usuario_alt.php');
                                     break;
+                                case 'vid_inc': include('videos_inc.php');
+                                    break;
+                                case 'vid_alt': include('videos_alt.php');
+                                    break;
                                 default: include('inicial.php');
                             }
                             ?>
@@ -171,8 +179,9 @@ include_once('sessao.php');
                             <li><a href="?url=img"> <i class="fas fa-images"></i> Imagens do Site (Front-End)</a></li>
                             <li><a href="?url=gal"> <i class="fas fa-images"></i> Galeria/Fotos</a></li>
                             <li><a href="?url=lug"> <i class="fas fa-bus"></i> Lugares</a></li>
-                            <li> <a href="?url=rot"> <i class="fas fa-clipboard-list"></i> Roteiros</a></li>
+                            <li><a href="?url=rot"> <i class="fas fa-clipboard-list"></i> Roteiros</a></li>
                             <li><a href="?url=rot_lug"> <i class="fas fa-map-marked-alt"></i> Definir roteiros</a></li>
+                            <li><a href="?url=vid_inc"> <i class="fas fa-video"></i> Vídeos</a></li>
                             <li><a href="?url=usu"> <i class="fas fa-user-tie"></i> Usuários</a></li>
                         </ul>
                     </nav>

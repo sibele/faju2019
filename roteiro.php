@@ -4,7 +4,7 @@ $roteiro_id = $_GET["url"];
 $id = str_replace("rot", "", $roteiro_id);
 
 include './conexao.php';
-$sqli = "select * "
+$sqli = "select parada.id, parada.nome, lugares.id, lugares.nome, lugares.descricao as descricao_lugares, lugares.localizacao, lugares.foto_principal, roteiro_lugares.id, roteiro_lugares.roteiro_id, roteiro_lugares.lugares_id, roteiro_lugares.parada_id, roteiro_lugares.descricao as rot_lug_descricao "
         . "from roteiro_lugares, parada, lugares where roteiro_lugares.lugares_id = lugares.id and roteiro_lugares.parada_id = parada.id and roteiro_lugares.roteiro_id = $id
             order by parada.nome ASC;";
 $query = $mysqli->query($sqli);
@@ -12,7 +12,7 @@ $query = $mysqli->query($sqli);
 $sql = "Select * from roteiro where id = $id;";
 $query1 = $mysqli->query($sql);
 $dados = $query1->fetch_array();
-    $sobre = $dados['titulo'];
+$sobre = $dados['titulo'];
 ?>
 
 <sectionrot id="about">
@@ -54,7 +54,15 @@ $dados = $query1->fetch_array();
                                             <h4 class="subheading"><?php echo $q['nome'] ?></h4>
                                         </div>
                                         <div class="timeline-body">
-                                            <p class="text-muted"><?php echo $q['descricao'] ?></p>
+                                            <p class="text-muted">
+                                                <?php
+                                                if ($q['rot_lug_descricao'] != null) {
+                                                    echo $q['rot_lug_descricao'];
+                                                } else {
+                                                    echo $q['descricao_lugares'];
+                                                }
+                                                ?>  
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +107,15 @@ $dados = $query1->fetch_array();
                                             <h4 class="subheading"><?php echo $q['nome'] ?></h4>
                                         </div>
                                         <div class="timeline-body">
-                                            <p class="text-muted"><?php echo $q['descricao'] ?></p>
+                                            <p class="text-muted">
+                                                <?php
+                                                if ($q['rot_lug_descricao'] != null) {
+                                                    echo $q['rot_lug_descricao'];
+                                                } else {
+                                                    echo $q['descricao_lugares'];
+                                                }
+                                                ?>  
+                                            </p>
                                         </div>
                                     </div>    
                                 </div>
